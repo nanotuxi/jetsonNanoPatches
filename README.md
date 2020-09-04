@@ -87,18 +87,15 @@ cd ~
 ```
 	
 4a. Patch Eigen
-
-	sudo nano /usr/local/include/eigen3/Eigen/Core
-
-   in line 257 under 
-    ```#if defined EIGEN_HAS_CUDA_FP16``` ,change
-    ```
-    #include <host_defines.h>
-    ```
-    	to```
-    #include <cuda_runtime_api.h>
-    ```
-    otherwise the compiler will be angry with you later while compiling Open3D ;-)
+     ```sudo nano /usr/local/include/eigen3/Eigen/Core```
+	in line 257 under 
+     ```#if defined EIGEN_HAS_CUDA_FP16``` 
+        change
+     ```#include <host_defines.h>```
+    	to
+     ```#include <cuda_runtime_api.h>
+     ```
+        otherwise cmake will be angry with you later while compiling Open3D ;-)
 ```	
 cd ~	
 ```
@@ -119,25 +116,24 @@ cd ~
 cd ~
 ```
 7. Install OpenCV with cuda enabled in the activated python venv
-```
-	cd git_src/
+	
+     ```cd git_src/
 	mkdir mdegans
 	cd mdegans
 	source ~/.venv/jetscan/bin/activate
 	git clone https://github.com/mdegans/nano_build_opencv.git
-	cd nano_build_opencv
-  ```
+	cd nano_build_opencv```
+	
   edit build_opencv.sh with
-  ```nano build_opencv.sh```
-	and remove all entries for installing the deb packages for cmake and libeigen
-	as we installed them from source already
-	and then run
-  ```
-  	./nano build_opencv.sh
+	
+     ```nano build_opencv.sh```
+  and remove all entries for installing the deb packages for cmake and libeigen
+  as we installed them from source already
+  and then run
+    ```./nano build_opencv.sh
 	cd ~/.venv/jetscan/lib/python3.6/site-packages/
    	ln -s /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
-cd ~
-```
+cd ~```
 8. Install a python util to get detailed info about your jetson device
 ```
 	cd ~/git_src/JetsonHacks
@@ -146,14 +142,16 @@ cd ~
 	source ~/.venv/jetscan/bin/activate
 	cython2 jetsonInfo.py >*/jetsoninfo.txt
 cd ~
-```  
-9. Install Open3D with Cuda support
 ```
-	mkdir -p git_src/Open3D && cd git_src/Open3D
+9. Install Open3D with Cuda support
+
+        ```
+        mkdir -p git_src/Open3D && cd git_src/Open3D
 	git clone --recursive https://github.com/theNded/Open3D.git
-``` 
-  check that you are on ```
-  commit 0ca8fd19d355d80e5998efec31858fe19791ccf5
+	``` 
+       check that you are on 
+        	
+     ```commit 0ca8fd19d355d80e5998efec31858fe19791ccf5
 	Date:   Wed Sep 2 15:01:08 2020 -0400
 		Update README.md
     ```
@@ -167,7 +165,7 @@ cd ~
   ```
   (should be python3)
 ```
-  util/scripts/install-deps-ubuntu.sh
+        util/scripts/install-deps-ubuntu.sh
 	sudo apt autoremove
 	sudo apt clean
 	cmake ..
@@ -177,7 +175,7 @@ cd ~
 
 9a. Test if Open3D python works in the virtual environment  
        ```python -c "import open3d"```
-should give you no errors.
+    should give you no errors.
 ```cd ~```
 10. Install librealsense
    ```cd ~/git_src/JetsonHacks
