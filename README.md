@@ -139,10 +139,10 @@ cd ~
 	cd nano_build_opencv
      ```
 	
-  edit build_opencv.sh with
+     edit build_opencv.sh with
 	
      ```
-     nano build_opencv.sh
+        nano build_opencv.sh
      ```
   and remove all entries for installing the deb packages for cmake and libeigen
   as we installed them from source already
