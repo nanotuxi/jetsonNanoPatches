@@ -40,7 +40,7 @@ in a shell enter
 to make sure that cuda and its headers are found at any time.
 
 1. Install a fan for the jetson device
-  ```mkdir git_src && cd git_src/
+  ```   mkdir git_src && cd git_src/
 	git clone https://github.com/Pyrestone/jetson-fan-ctl.git
 	cd jetson-fan-ctl/
 	sudo ./install.sh
@@ -77,7 +77,8 @@ cd ~
 cd ~
 ```
 4. Update Eigen (date now: 04.07.2020) to 3.3.7
-```wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2
+      ```
+         wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2
 	 tar xvf eigen-3.3.7.tar.bz2
 	 sudo apt remove --purge libeigen3-dev
 	 sudo apt autoremove
@@ -85,18 +86,18 @@ cd ~
 	 mkdir build && cd build
 	 cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
 	 sudo make install
-```
+      ```
 	
 4a. Patch Eigen
 	  
-	  ```
+```
 	  sudo nano /usr/local/include/eigen3/Eigen/Core
-	  ```
+```
   in line 257 under 
 	  
-         ```
+ ```
          #if defined EIGEN_HAS_CUDA_FP16
-         ```
+ ```
    change
          ```
          #include <host_defines.h>
@@ -150,32 +151,34 @@ cd ~
        ./nano build_opencv.sh
 	cd ~/.venv/jetscan/lib/python3.6/site-packages/
    	ln -s /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
-```    ```
+    ```   
+```  
 cd ~
 ```
 8. Install a python util to get detailed info about your jetson device
-        ```
+     ```
 	cd ~/git_src/JetsonHacks
 	git clone https://github.com/jetsonhacks/jetsonUtilities.git
 	cd jetsonUtilities
 	source ~/.venv/jetscan/bin/activate
 	cython2 jetsonInfo.py >*/jetsoninfo.txt
-```	```
+      ```	
+```
 cd ~
 ```
 9. Install Open3D with Cuda support
-	   ```
+     ```
         mkdir -p git_src/Open3D && cd git_src/Open3D
-		git clone --recursive https://github.com/theNded/Open3D.git
-	    ```
-     check that you are on 	
+	git clone --recursive https://github.com/theNded/Open3D.git
     ```
+   check that you are on 	
+       ```
 	    commit 0ca8fd19d355d80e5998efec31858fe19791ccf5
 	Date:   Wed Sep 2 15:01:08 2020 -0400
 		Update README.md
-    ```
+       ```
 	in git history, otherwise
-    ```
+       ```
     git checkout 0ca8fd19d355d80e5998efec31858fe19791ccf5
     ```
     ```
