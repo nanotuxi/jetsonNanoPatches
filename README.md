@@ -87,8 +87,9 @@ cd ~
 ```
 	
 4a. Patch Eigen
-   ```sudo nano /usr/local/include/eigen3/Eigen/Core
-   ```
+
+	sudo nano /usr/local/include/eigen3/Eigen/Core
+
    in line 257 under 
     ```#if defined EIGEN_HAS_CUDA_FP16``` ,change
     ```
