@@ -87,26 +87,29 @@ cd ~
 ```
 	
 4a. Patch Eigen
-     ```sudo nano /usr/local/include/eigen3/Eigen/Core```
-	in line 257 under 
-     ```#if defined EIGEN_HAS_CUDA_FP16``` 
-        change
+	  
+	  ```sudo nano /usr/local/include/eigen3/Eigen/Core
+	  ```
+  in line 257 under 
+	  
+     ```#if defined EIGEN_HAS_CUDA_FP16```
+   change
      ```#include <host_defines.h>```
-    	to
-     ```#include <cuda_runtime_api.h>
-     ```
-        otherwise cmake will be angry with you later while compiling Open3D ;-)
+   to
+     ```#include <cuda_runtime_api.h>```
+	 
+   otherwise cmake will be angry with you later while compiling Open3D ;-)
 ```	
 cd ~	
 ```
 5. Install a python virtual environment
-```
-	sudo apt install python3-venv
+
+     ```sudo apt install python3-venv
 	cd ~
 	mkdir -p ~/.venv/jetscan
 	python3 -m venv ~/.venv/jetscan
 	source ~/.venv/jetscan/bin/activate
-```
+     ```
 6. Update some libs in venv
 ```
 	pip3 install --upgrade pip
@@ -144,14 +147,13 @@ cd ~```
 cd ~
 ```
 9. Install Open3D with Cuda support
-
-        ```
+	   ```
         mkdir -p git_src/Open3D && cd git_src/Open3D
-	git clone --recursive https://github.com/theNded/Open3D.git
-	``` 
-       check that you are on 
-        	
-     ```commit 0ca8fd19d355d80e5998efec31858fe19791ccf5
+		git clone --recursive https://github.com/theNded/Open3D.git
+	    ```
+     check that you are on 	
+    ```
+	    commit 0ca8fd19d355d80e5998efec31858fe19791ccf5
 	Date:   Wed Sep 2 15:01:08 2020 -0400
 		Update README.md
     ```
@@ -174,7 +176,8 @@ cd ~
   ```
 
 9a. Test if Open3D python works in the virtual environment  
-       ```python -c "import open3d"```
+       
+```python -c "import open3d"```
     should give you no errors.
 ```cd ~```
 10. Install librealsense
