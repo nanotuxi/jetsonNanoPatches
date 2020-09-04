@@ -30,7 +30,7 @@ Install Opend3D with Cuda and libRealsense support:
 Pre:
 in a shell enter
 ```
-  sudo ln -s /usr/local/cuda-10.2 /usr/local/cuda
+        sudo ln -s /usr/local/cuda-10.2 /usr/local/cuda
         
 	export CPATH=/usr/local/cuda-10.2/targets/aarch64-linux/include:$CPATH
 	export LD_LIBRARY_PATH=/usr/local/cuda-10.2/targets/aarch64-linux/lib:$LD_LIBRARY_PATH
@@ -50,8 +50,8 @@ to make sure that cuda and its headers are found at any time.
 cd ~
 ```
 2. Increase the swap memory
-```cd git_src/
-   mkdir JetsonHacks  && cd JetsonHacks
+```      cd git_src/
+         mkdir JetsonHacks  && cd JetsonHacks
 	 git clone https://github.com/JetsonHacksNano/resizeSwapMemory.git
 	 cd resizeSwapMemory/
 	 ./setSwapMemorySize.sh -g 4
@@ -147,23 +147,22 @@ cd ~
   and remove all entries for installing the deb packages for cmake and libeigen
   as we installed them from source already
   and then run
-    ```
+```
        ./nano build_opencv.sh
 	cd ~/.venv/jetscan/lib/python3.6/site-packages/
    	ln -s /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
-    ```   
-```  
+
 cd ~
 ```
 8. Install a python util to get detailed info about your jetson device
-     ```
+     
+ ```
 	cd ~/git_src/JetsonHacks
 	git clone https://github.com/jetsonhacks/jetsonUtilities.git
 	cd jetsonUtilities
 	source ~/.venv/jetscan/bin/activate
 	cython2 jetsonInfo.py >*/jetsoninfo.txt
-      ```	
-```
+
 cd ~
 ```
 9. Install Open3D with Cuda support
@@ -188,43 +187,59 @@ cd ~
 	python --version
      ```
   (should be python3)
-```
+       ```
         util/scripts/install-deps-ubuntu.sh
 	sudo apt autoremove
 	sudo apt clean
 	cmake ..
 	make -j3
 	make install-pip-package
-  ```
+        ```
 
-9a. Test if Open3D python works in the virtual environment  
-       
-```python -c "import open3d"```
+9a. Test if Open3D python works in the virtual environment
+       ```
+       python -c "import open3d"
+       ```
     should give you no errors.
-```cd ~```
+ ```
+ cd ~
+ ```
 10. Install librealsense
-   ```cd ~/git_src/JetsonHacks
+   ```
+      cd ~/git_src/JetsonHacks
       git clone https://github.com/JetsonHacksNano/installLibrealsense.git
       cd installLibrealsense
    ```
 
    edit buildLibrealsense.sh  with 
-```nano  buildLibrealsense.sh```
+     ```
+   	nano  buildLibrealsense.sh
+     ```
    and set in line 6
-```# Jetson Nano; L4T 32.4.3```
+   ```
+    # Jetson Nano; L4T 32.4.3
+   ```
    and set in line 9
-	  ```LIBREALSENSE_VERSION=v2.38.1```
+	  ```
+	   LIBREALSENSE_VERSION=v2.38.1
+	  ```
    and set in line 11
-	   ```NVCC_PATH=/usr/local/cuda-10.2/bin/nvcc```
+	   ```
+	   NVCC_PATH=/usr/local/cuda-10.2/bin/nvcc
+	   ```
 	   
    edit scripts/installDependencies.sh with
-	   ```nano scripts/installDependencies.sh```
+	   ```
+	   nano scripts/installDependencies.sh
+	   ```
    and remove all entries for installing the deb packages for cmake and libeigen
    as we installed them from source already
    
    plug off your camera
    and then run	
-```./buildLibrealsense.sh```
+   ```
+   ./buildLibrealsense.sh
+   ```
 
 Here you should be able to use Open3d with Cuda support for your RealSense camera.
 
