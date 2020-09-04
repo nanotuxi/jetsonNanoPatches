@@ -1,6 +1,12 @@
 # jetsonNanoPatches
 Patches to use Open3D on the Jetson Nano with cuda10.2  and librealsense
 
+download the patch with
+
+```wget https://raw.githubusercontent.com/nanotuxi/jetsonNanoPatches/master/Open3DJetsonCudaRealSense.patch```
+into your Open3D root directory and apply it with
+```git apply Open3DJetsonCudaRealSense.patch```
+
 To work with an Intel Realsense Camera (here: D435i) on a
 ```
 NVIDIA Jetson Nano (Developer Kit Version)
