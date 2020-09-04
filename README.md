@@ -60,7 +60,8 @@ cd ~
 cd ~
 ```
 3. Update cmake (date now: 04.07.2020) to v3.18.2
-```cmake --version
+```
+         cmake --version
 	 wget https://gitlab.kitware.com/cmake/cmake/-/archive/v3.18.2/cmake-v3.18.2.tar.bz2
 	 tar xvf cmake-v3.18.2.tar.bz2
 	 sudo apt install libssl-dev
@@ -88,15 +89,22 @@ cd ~
 	
 4a. Patch Eigen
 	  
-	  ```sudo nano /usr/local/include/eigen3/Eigen/Core
+	  ```
+	  sudo nano /usr/local/include/eigen3/Eigen/Core
 	  ```
   in line 257 under 
 	  
-     ```#if defined EIGEN_HAS_CUDA_FP16```
+         ```
+         #if defined EIGEN_HAS_CUDA_FP16
+         ```
    change
-     ```#include <host_defines.h>```
+         ```
+         #include <host_defines.h>
+         ```
    to
-     ```#include <cuda_runtime_api.h>```
+         ```
+         #include <cuda_runtime_api.h>
+         ```
 	 
    otherwise cmake will be angry with you later while compiling Open3D ;-)
 ```	
@@ -104,12 +112,13 @@ cd ~
 ```
 5. Install a python virtual environment
 
-     ```sudo apt install python3-venv
+      ```
+        sudo apt install python3-venv
 	cd ~
 	mkdir -p ~/.venv/jetscan
 	python3 -m venv ~/.venv/jetscan
 	source ~/.venv/jetscan/bin/activate
-     ```
+      ```
 6. Update some libs in venv
 ```
 	pip3 install --upgrade pip
@@ -119,31 +128,39 @@ cd ~
 cd ~
 ```
 7. Install OpenCV with cuda enabled in the activated python venv
-	
-     ```cd git_src/
+
+     ```
+        cd git_src/
 	mkdir mdegans
 	cd mdegans
 	source ~/.venv/jetscan/bin/activate
 	git clone https://github.com/mdegans/nano_build_opencv.git
-	cd nano_build_opencv```
+	cd nano_build_opencv
+     ```
 	
   edit build_opencv.sh with
 	
-     ```nano build_opencv.sh```
+     ```
+     nano build_opencv.sh
+     ```
   and remove all entries for installing the deb packages for cmake and libeigen
   as we installed them from source already
   and then run
-    ```./nano build_opencv.sh
+    ```
+       ./nano build_opencv.sh
 	cd ~/.venv/jetscan/lib/python3.6/site-packages/
    	ln -s /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
-cd ~```
-8. Install a python util to get detailed info about your jetson device
+```    ```
+cd ~
 ```
+8. Install a python util to get detailed info about your jetson device
+        ```
 	cd ~/git_src/JetsonHacks
 	git clone https://github.com/jetsonhacks/jetsonUtilities.git
 	cd jetsonUtilities
 	source ~/.venv/jetscan/bin/activate
 	cython2 jetsonInfo.py >*/jetsoninfo.txt
+```	```
 cd ~
 ```
 9. Install Open3D with Cuda support
@@ -158,13 +175,15 @@ cd ~
 		Update README.md
     ```
 	in git history, otherwise
-```
-  git checkout 0ca8fd19d355d80e5998efec31858fe19791ccf5
+    ```
+    git checkout 0ca8fd19d355d80e5998efec31858fe19791ccf5
+    ```
+    ```
 	cd Open3D
 	mkdir build  cd build
 	source ~/.venv/jetscan/bin/activate
 	python --version
-  ```
+     ```
   (should be python3)
 ```
         util/scripts/install-deps-ubuntu.sh
