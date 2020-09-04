@@ -128,14 +128,14 @@ cd ~
 	cd nano_build_opencv
   ```
   edit build_opencv.sh with
-		```nano build_opencv.sh```
+  ```nano build_opencv.sh```
 	and remove all entries for installing the deb packages for cmake and libeigen
 	as we installed them from source already
 	and then run
   ```
-  ./nano build_opencv.sh
+  	./nano build_opencv.sh
 	cd ~/.venv/jetscan/lib/python3.6/site-packages/
-   ln -s /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
+   	ln -s /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
 cd ~
 ```
 8. Install a python util to get detailed info about your jetson device
@@ -181,8 +181,8 @@ should give you no errors.
 ```cd ~```
 10. Install librealsense
    ```cd ~/git_src/JetsonHacks
-   git clone https://github.com/JetsonHacksNano/installLibrealsense.git
-   cd installLibrealsense
+      git clone https://github.com/JetsonHacksNano/installLibrealsense.git
+      cd installLibrealsense
    ```
 
    edit buildLibrealsense.sh  with 
