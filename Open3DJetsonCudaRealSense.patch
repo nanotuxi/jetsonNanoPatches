@@ -1,0 +1,121 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 59fb70701..6104f06b8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,7 +27,7 @@ option(BUILD_TINYFILEDIALOGS     "Build tinyfiledialogs from source"        ON)
+ option(BUILD_TINYGLTF            "Build TinyGLTF from source"               ON)
+ option(BUILD_TINYOBJLOADER       "Build tinyobjloader from source"          ON)
+ option(BUILD_QHULL               "Build qhull from source"                  ON)
+-option(BUILD_CUDA_MODULE         "Build the CUDA module"                    OFF)
++option(BUILD_CUDA_MODULE         "Build the CUDA module"                    ON)
+ option(BUILD_TENSORFLOW_OPS      "Build ops for Tensorflow"                 OFF)
+ option(ENABLE_JUPYTER            "Enable Jupyter support for Open3D"        ON)
+ option(STATIC_WINDOWS_RUNTIME    "Use static (MT/MTd) Windows runtime"      OFF)
+diff --git a/examples/Cuda/ReconstructionSystem/config/intel/test.json b/examples/Cuda/ReconstructionSystem/config/intel/test.json
+index 2d5ccde14..e9e1103f6 100644
+--- a/examples/Cuda/ReconstructionSystem/config/intel/test.json
++++ b/examples/Cuda/ReconstructionSystem/config/intel/test.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "CMU - Test",
+-  "path_dataset": "/home/dongw1/Workspace/data/intel/",
+-  "path_intrinsic": "/home/dongw1/Workspace/open3d-unofficial/examples/Cuda/ReconstructionSystem/config/intrinsics/camera_azure_kinect.json",
++  "path_dataset": "~/git_src/open3d/theNded/Open3D/examples/Python/ReconstructionSystem/dataset/realsense/",
++  "path_intrinsic": "~/git_src/open3d/theNded/Open3D/examples/Python/ReconstructionSystem/dataset/realsense/camera_intrinsic.json",
+   "n_frames_per_fragment": 100,
+   "n_keyframes_per_n_frame": 5,
+   "max_depth": 3.0,
+diff --git a/examples/Python/ReconstructionSystem/sensors/realsense_pcd_visualizer.py b/examples/Python/ReconstructionSystem/sensors/realsense_pcd_visualizer.py
+index d871fda6f..8f637cf6c 100644
+--- a/examples/Python/ReconstructionSystem/sensors/realsense_pcd_visualizer.py
++++ b/examples/Python/ReconstructionSystem/sensors/realsense_pcd_visualizer.py
+@@ -39,8 +39,11 @@ if __name__ == "__main__":
+     #Create a config and configure the pipeline to stream
+     #  different resolutions of color and depth streams
+     config = rs.config()
+-
+-    config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
++
++    # Depth stream  should only be set to max 6 frames at 1280x720 on the jetson nano
++    # Color stream  should only be set to max 15 frames at 1280x720 on the jetson nano
++    #config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 6)
++    config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+     config.enable_stream(rs.stream.color, 640, 480, rs.format.rgb8, 30)
+ 
+     # Start streaming
+diff --git a/examples/Python/ReconstructionSystem/sensors/realsense_recorder.py b/examples/Python/ReconstructionSystem/sensors/realsense_recorder.py
+index fb1f714dc..694ab7b2d 100644
+--- a/examples/Python/ReconstructionSystem/sensors/realsense_recorder.py
++++ b/examples/Python/ReconstructionSystem/sensors/realsense_recorder.py
+@@ -111,8 +111,11 @@ if __name__ == "__main__":
+     if args.record_imgs or args.record_rosbag:
+         # note: using 640 x 480 depth resolution produces smooth depth boundaries
+         #       using rs.format.bgr8 for color image format for OpenCV based image visualization
+-        config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
+-        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
++        # Depth stream  should only be set to max 6 frames at 1280x720 on the jetson nano
++        # Color stream  should only be set to max 15 frames at 1280x720 on the jetson nano
++        # Do not know if different framerates are allowed here. May result in bad scene reconstructions
++        config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 6)
++        config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 15)
+         if args.record_rosbag:
+             config.enable_record_to_file(path_bag)
+     if args.playback_rosbag:
+diff --git a/src/Cuda/CMakeLists.txt b/src/Cuda/CMakeLists.txt
+index d49ba2822..149a1018e 100644
+--- a/src/Cuda/CMakeLists.txt
++++ b/src/Cuda/CMakeLists.txt
+@@ -75,6 +75,7 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+         PATTERN "*.cuh" EXCLUDE
+         PATTERN "*.cu" EXCLUDE
+         PATTERN "*.txt" EXCLUDE)
++set_property(TARGET ${OPEN3D_CUDA_MODULE}  PROPERTY CUDA_ARCHITECTURES 35 50 72)
+ 
+ # uninstall target
+ if (NOT TARGET uninstall)
+diff --git a/src/Open3D/CMakeLists.txt b/src/Open3D/CMakeLists.txt
+index 44049d617..5a0ff0bc7 100644
+--- a/src/Open3D/CMakeLists.txt
++++ b/src/Open3D/CMakeLists.txt
+@@ -72,6 +72,7 @@ install(FILES
+         "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/Open3DConfig.cmake"
+         "${PROJECT_BINARY_DIR}/Open3DConfigVersion.cmake"
+         DESTINATION "${Open3D_INSTALL_CMAKE_DIR}" COMPONENT dev)
++set_property(TARGET ${PROJECT_NAME}  PROPERTY CUDA_ARCHITECTURES 35 50 72)
+ 
+ # uninstall target
+ if (NOT TARGET uninstall)
+diff --git a/src/Open3D/Core/CMakeLists.txt b/src/Open3D/Core/CMakeLists.txt
+index 664a8263f..314789b7f 100644
+--- a/src/Open3D/Core/CMakeLists.txt
++++ b/src/Open3D/Core/CMakeLists.txt
+@@ -52,6 +52,7 @@ endif()
+ add_library(Core OBJECT ${ALL_CORE_SRC})
+ open3d_set_global_properties(Core)
+ open3d_link_3rdparty_libraries(Core)
++set_property(TARGET Core  PROPERTY CUDA_ARCHITECTURES 35 50 72)
+ 
+ if (BUILD_CUDA_MODULE)
+     target_include_directories(Core PRIVATE ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
+diff --git a/util/scripts/install-deps-ubuntu.sh b/util/scripts/install-deps-ubuntu.sh
+index a35d27a71..e3e121655 100755
+--- a/util/scripts/install-deps-ubuntu.sh
++++ b/util/scripts/install-deps-ubuntu.sh
+@@ -12,7 +12,7 @@ if [ "$1" == "assume-yes" ]; then
+     sudo apt-get --yes install libpng16-dev || true
+     sudo apt-get --yes install libsdl2-dev || true
+     sudo apt-get --yes install python-dev python-tk || true
+-    sudo apt-get --yes install python3-dev python3-tk || true
++    sudo apt-get --yes install python3-dev python3-tk python3-setuptools python3-wheel|| true
+     sudo apt-get --yes install libtbb-dev || true
+     sudo apt-get --yes install libglu1-mesa-dev || true
+     sudo apt-get --yes install libc++-7-dev || true
+@@ -28,7 +28,7 @@ else
+     sudo apt-get install libpng16-dev || true
+     sudo apt-get install libsdl2-dev || true
+     sudo apt-get install python-dev python-tk || true
+-    sudo apt-get install python3-dev python3-tk || true
++    sudo apt-get install python3-dev python3-tk python3-setuptools python3-wheel|| true
+     sudo apt-get install libtbb-dev || true
+     sudo apt-get install libglu1-mesa-dev || true
+     sudo apt-get install libc++-7-dev || true
