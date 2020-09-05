@@ -15,7 +15,7 @@
 
 ## General info
 This project contains a patch for [Open3D](https://github.com/intel-isl/Open3D) to use it with cuda and librealsense on a Jetson Nano.
-After you applied the patch you can use Open3D with Python support.
+After you applied the patch you can use Open3D with Python, Cuda and librealsense support on a Jetson Nano.
 The visualizer has to be compiled separately (C++-version)
 
 
