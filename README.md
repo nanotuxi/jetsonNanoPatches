@@ -259,7 +259,7 @@ $ cd ~
 
 Install Open3D with Cuda support
 ```
-$ mkdir -p git_src/Open3D && cd git_src/Open3D
+$ mkdir -p git_src/Open3D/theNded && cd git_src/Open3D/theNded
 $ git clone --recursive https://github.com/theNded/Open3D.git
 ```
 check that you work on
@@ -283,7 +283,7 @@ $ cd Open3D
 Make sure that you are in the root of your Open3D installation directory.
 Your path should look like
 ```
-$ ~/git_src/Open3d/Open3d/
+$ ~/git_src/Open3d/theNded/Open3d/
 ```
 now. This should be checked with
 ```
