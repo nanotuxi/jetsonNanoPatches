@@ -40,8 +40,10 @@ Project is based on
 
 ### Patch to get the following features enabled on NVidia Jetson Nano Single Board Computer:
 
-* 3D reconstruction on a Jetson Nano with Open3D (e.g. generating 3D scenes of the real world from Pointcloud Maps)
+* 3D reconstruction on a Jetson Nano with [Open3D](https://github.com/theNded/Open3D) (e.g. generating 3D scenes of the real world from Pointcloud Maps)
 * (Unofficial) Open3d with cuda support
+
+* Easy to use installation scripts (can be installed independantly / are not necesseralily affected by this patch)
 * Intel's librealSense support
 * OpenCV version: 4.4.0 with Cuda support
 
@@ -81,9 +83,9 @@ Software provided here: a single patch
 
 Software provided by others
 
-* Nivida Jetson Nano sd-card image [https://developer.nvidia.com/jetson-nano-sd-card-image](NVidia)
-* Open3D             [http://www.open3d.org/docs/release/index.html](Open3D)
-* librealSense       [https://github.com/IntelRealSense/librealsense](Intel)
+* Nivida Jetson Nano sd-card image [NVidia](https://developer.nvidia.com/jetson-nano-sd-card-image) ATTENTION: direct download link with more than 5GB!!!
+* Open3D             [Open3D](http://www.open3d.org/docs/release/index.html)
+* librealSense       [IntelRealSense](https://github.com/IntelRealSense/librealsense)
 * OpenCV             [install script by mdegans](https://github.com/mdegans/nano_build_opencv.git)
 * jetsonUtilities    [install script by JetsonHacks](https://github.com/jetsonhacks/jetsonUtilities) 
 * resizeSwapMemory   [install script by JetsonHacks](https://github.com/JetsonHacksNano/resizeSwapMemory)
