@@ -40,9 +40,11 @@ Project is based on
 
 ### Patch to get the following features enabled on NVidia Jetson Nano Single Board Computer:
 
-* 3D reconstruction on a Jetson Nano with [Open3D](https://github.com/theNded/Open3D) (e.g. generating 3D scenes of the real world from Pointcloud Maps)
+* Python3 support
+* Cuda 10.2 support
+* librealsense support
+* 3D reconstruction on a Jetson Nano with [Open3D](https://github.com/theNded/Open3D) (e.g. generating 3D scenes of the real world)
 * (Unofficial) Open3d with cuda support
-
 * Easy to use installation scripts (can be installed independantly / are not necesseralily affected by this patch)
 * Intel's librealSense support
 * OpenCV version: 4.4.0 with Cuda support
@@ -122,15 +124,16 @@ These steps are needed as the version of the software installed by default with 
 or
 * need to be patched
 or
-* are not available as binaries for this architecture (aarch64)
-
-A detailed how-to for compiling Open3D from source can be found [here](http://www.open3d.org/docs/release/compilation.html) 
+* are not available as binaries for this architecture (aarch64) 
 
 That is:
 * cmake
 * Eigen3 (libeigen-dev)
 * OpenCV 4.4.0
 * librealSense
+
+The official detailed how-to for compiling Open3D from source can be found [here](http://www.open3d.org/docs/release/compilation.html)
+Because there are no working python binaries avaiable for arm computers yet you have to complete these additional steps:
 
 
 # Optional Hardware: Add a fan
