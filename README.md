@@ -18,6 +18,8 @@ This project contains a patch for [Open3D](https://github.com/intel-isl/Open3D) 
 After you applied the patch you can use Open3D with Python, Cuda and librealsense support on a Jetson Nano.
 The visualizer has to be compiled separately (C++-version)
 
+You can see Open3D on a Jetson Nano in action [here](https://blog.georgmill.de/2020/09/01/3d-reconstruction-with-open3d-on-a-jetson-nano)
+
 
 You can use your Intel Realsense Camera for mobile 3D reconstruction on the Jetson device.
 To get more information about the used hardware or additional components you want to use, visit [https://elinux.org/Jetson_Nano](https://elinux.org/Jetson_Nano) 
