@@ -308,9 +308,9 @@ edit buildLibrealsense.sh with
 $ nano  buildLibrealsense.sh
 ```
 and set in line 6
-
+```
 # Jetson Nano; L4T 32.4.3
-
+```
 and set in line 9
 ```
 LIBREALSENSE_VERSION=v2.38.1
