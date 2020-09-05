@@ -45,13 +45,13 @@ Project is based on
 * librealsense support
 * 3D reconstruction on a Jetson Nano with [Open3D](https://github.com/theNded/Open3D) (e.g. generating 3D scenes of the real world)
 * (Unofficial) Open3d with cuda support
-* Easy to use installation scripts (can be installed independantly / are not necesseralily affected by this patch)
+* Easy to use installation scripts (can be installed independantly / are not necessarily affected by this patch)
 * Intel's librealSense support
 * OpenCV version: 4.4.0 with Cuda support
 
 ## Technologies
 
-3D reconstruction on a (mobile) Single Board Computer.
+3D reconstruction on a (mobile) single board computer.
 
 Project contains:
 * patch to compile Open3D for the NVidia Jetson Nano sbc with CUDA 10.2 and librealsense support.
@@ -74,10 +74,10 @@ NVIDIA Jetson Nano (Developer Kit Version)
 ```
 
 ##  Hardware
-* Nvidia Jetson Nano [https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-nano/](https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-nano/)
-* 5V cooling PWM fan, e.g. Noctua nf-a4x20 5V PWM. [https://noctua.at/en/nf-a4x20-5v-pwm](https://noctua.at/en/nf-a4x20-5v-pwm)
-* Intel Realsense Camera - the D435i [https://www.intelrealsense.com/depth-camera-d435i/](https://www.intelrealsense.com/depth-camera-d435i/) is the only hardware tested with this patch , but other cameras may work, too.
-* optional: Battery supply for outdoor use. Try one of those (untested) [https://elinux.org/Jetson_Nano#Battery_Packs](https://elinux.org/Jetson_Nano#Battery_Packs)
+* [Nvidia Jetson Nano](https://www.nvidia.com/de-de/autonomous-machines/embedded-systems/jetson-nano/)
+* [5V cooling PWM fan, e.g. Noctua nf-a4x20 5V PWM.](https://noctua.at/en/nf-a4x20-5v-pwm)
+* [Intel Realsense Camera - the D435i](https://www.intelrealsense.com/depth-camera-d435i/) is the only hardware tested with this patch , but other cameras may work, too.
+* optional: [Battery supply for outdoor use. Try one of those (untested)](https://elinux.org/Jetson_Nano#Battery_Packs)
 
 ## Software
 
@@ -132,8 +132,8 @@ That is:
 * OpenCV 4.4.0
 * librealSense
 
-The official detailed how-to for compiling Open3D from source can be found [here](http://www.open3d.org/docs/release/compilation.html)
-Because there are no working python binaries avaiable for arm computers yet you have to complete these additional steps:
+The official detailed how-to for compiling Open3D from source can be found [here](http://www.open3d.org/docs/release/compilation.html).
+Because there are no working python binaries available for arm computers yet you have to complete these additional steps and compile the things needed from source.
 
 
 # Optional Hardware: Add a fan
@@ -259,26 +259,53 @@ $ cd ~
 
 Install Open3D with Cuda support
 ```
-mkdir -p git_src/Open3D && cd git_src/Open3D
-git clone --recursive https://github.com/theNded/Open3D.git
+$ mkdir -p git_src/Open3D && cd git_src/Open3D
+$ git clone --recursive https://github.com/theNded/Open3D.git
 ```
-check that you are on
+check that you work on
 ```
 commit 0ca8fd19d355d80e5998efec31858fe19791ccf5
 Date:   Wed Sep 2 15:01:08 2020 -0400
 Update README.md
 ```
+with
+```
+$ git log -1
+```
 in git history, otherwise
 ```
 $ git checkout 0ca8fd19d355d80e5998efec31858fe19791ccf5
-```
-```
 $ cd Open3D
-$ mkdir build  cd build
+```
+### Here is the place where my patch should be applied
+
+## Patch
+Make sure that you are in the root of your Open3D installation directory.
+Your path should look like
+```
+$ ~/git_src/Open3d/Open3d/
+```
+now. This should be checked with
+```
+$ pwd
+
+```
+To apply the patch, simply download the patch with
+
+```
+$ wget https://raw.githubusercontent.com/nanotuxi/jetsonNanoPatches/master/Open3DJetsonCudaRealSense.patch
+$ git apply Open3DJetsonCudaRealSense.patch
+```
+Then you can go on with the default installation:
+
+```
+$ mkdir build  
+$ $ cd build
 $ source ~/.venv/jetscan/bin/activate
 $ python --version
 ```
 (should be python3)
+
 ```
 $ util/scripts/install-deps-ubuntu.sh
 $ sudo apt autoremove
@@ -327,20 +354,14 @@ and remove all entries for installing the deb packages for cmake and libeigen as
 ```
 $ ./buildLibrealsense.sh
 ```
+
+As last step you should revert the swap size back to the original defaults (2G), if you are working on an sd-card.
+```
+cd ~/git_src/JetsonHacks
+$ ./setSwapMemorySize.sh -g 4
+```
 Here you should be able to use Open3d with Cuda support for your RealSense camera.
 
-## Patch
-
-To apply the patch, simply download the patch with
-
-```
-$ wget https://raw.githubusercontent.com/nanotuxi/jetsonNanoPatches/master/Open3DJetsonCudaRealSense.patch
-```
-into your Open3D root directory and apply it with
-
-```
-$ git apply Open3DJetsonCudaRealSense.patch
-```
 
 ## Status
 Project is: _in progress_
