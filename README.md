@@ -81,9 +81,9 @@ Software provided here: a single patch
 
 Software provided by others
 
-* Nivida Jetson Nano sd-card image (NVidia)[https://developer.nvidia.com/jetson-nano-sd-card-image]
-* Open3D             (Open3D)[http://www.open3d.org/docs/release/index.html]
-* librealSense       (Intel)[https://github.com/IntelRealSense/librealsense]
+* Nivida Jetson Nano sd-card image [https://developer.nvidia.com/jetson-nano-sd-card-image](NVidia)
+* Open3D             [http://www.open3d.org/docs/release/index.html](Open3D)
+* librealSense       [https://github.com/IntelRealSense/librealsense](Intel)
 * OpenCV             [install script by mdegans](https://github.com/mdegans/nano_build_opencv.git)
 * jetsonUtilities    [install script by JetsonHacks](https://github.com/jetsonhacks/jetsonUtilities) 
 * resizeSwapMemory   [install script by JetsonHacks](https://github.com/JetsonHacksNano/resizeSwapMemory)
