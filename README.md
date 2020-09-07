@@ -360,7 +360,7 @@ $ ./buildLibrealsense.sh
 As last step you should revert the swap size back to the original defaults (2G), if you are working on an sd-card.
 ```
 cd ~/git_src/JetsonHacks
-$ ./setSwapMemorySize.sh -g 4
+$ ./setSwapMemorySize.sh -g 2
 ```
 Here you should be able to use Open3d with Cuda support for your RealSense camera.
 
