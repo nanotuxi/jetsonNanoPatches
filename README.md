@@ -174,7 +174,7 @@ $ sudo apt install libcurl4-openssl-dev
 $ sudo apt remove --purge cmake
 $ sudo apt autoremove
 $ cd cmake-v3.18.2/
-$ ./boostrap
+$ ./bootstrap
 $ make -j3
 $ sudo make install
 $ which cmake
