@@ -1,5 +1,9 @@
 # jetsonNanoPatches
 
+## Outdated version. You should use the original intel repository as cuda support  has been merged. The new gui that can be seen on the intel github site is working on the nvidia jetson nano (aarch 64) now, too.
+
+## see [https://github.com/intel-isl/Open3D](https://github.com/intel-isl/Open3D)
+
 ## Table of contents
 * [General info](#general-info)
 * [Inspiration](#inspiration)
